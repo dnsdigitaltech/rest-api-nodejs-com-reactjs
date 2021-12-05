@@ -13,7 +13,7 @@ const RoutesAll = () => {
         <BrowserRouter>
             <Header/>
             <Routes>
-                <Route exact path="/" element={<Home/>} />
+                <Route path="/" element={<Home/>} />
                 <Route element={<PublicRoutes />}>
                     <Route path="/login" element={<Login/>} />
                 </Route>

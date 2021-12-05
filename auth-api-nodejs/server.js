@@ -13,8 +13,8 @@ const port = process.env.PORT || 4000;
 const userData = {
   userId: "789789",
   password: "123456",
-  name: "Clue Mediator",
-  username: "cluemediator",
+  name: "Dev Ops Vamos nessa!",
+  username: "teste",
   isAdmin: true
 };
 
@@ -38,7 +38,7 @@ app.use(function (req, res, next) {
     if (err) {
       return res.status(401).json({
         error: true,
-        message: "Invalid user."
+        message: "Usuário Inválido."
       });
     } else {
       req.user = user; //set the user to req so other routes can use it
@@ -50,7 +50,7 @@ app.use(function (req, res, next) {
 
 // request handlers
 app.get('/', (req, res) => {
-  if (!req.user) return res.status(401).json({ success: false, message: 'Invalid user to access it.' });
+  if (!req.user) return res.status(401).json({ success: false, message: 'Usuário sem permissão para este acesso!.' });
   res.send('Welcome to the Node.js Tutorial! - ' + req.user.name);
 });
 
@@ -64,7 +64,7 @@ app.post('/users/signin', function (req, res) {
   if (!user || !pwd) {
     return res.status(400).json({
       error: true,
-      message: "Username or Password required."
+      message: "Usuário e senha são obrigatórios."
     });
   }
 
@@ -72,7 +72,7 @@ app.post('/users/signin', function (req, res) {
   if (user !== userData.username || pwd !== userData.password) {
     return res.status(401).json({
       error: true,
-      message: "Username or Password is Wrong."
+      message: "Usuário e senha são errado."
     });
   }
 
@@ -92,29 +92,28 @@ app.get('/verifyToken', function (req, res) {
   if (!token) {
     return res.status(400).json({
       error: true,
-      message: "Token is required."
+      message: "Token é obrigatório."
     });
   }
   // check token that was passed by decoding token using secret
   jwt.verify(token, process.env.JWT_SECRET, function (err, user) {
     if (err) return res.status(401).json({
       error: true,
-      message: "Invalid token."
+      message: "Token inválido."
     });
 
     // return 401 status if the userId does not match.
     if (user.userId !== userData.userId) {
       return res.status(401).json({
         error: true,
-        message: "Invalid user."
+        message: "Usuário e senha errado."
       });
     }
     // get basic user details
     var userObj = utils.getCleanUser(userData);
-    return res.json({ user: userObj, token });
   });
 });
 
 app.listen(port, () => {
-  console.log('Server started on: ' + port);
+  console.log('Servidor iniciando na: ' + port);
 });

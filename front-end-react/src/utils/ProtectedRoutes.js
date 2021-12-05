@@ -1,5 +1,4 @@
 import {Navigate, Outlet} from 'react-router-dom';
-import Login from '../pages/Login';
 import { getToken } from './Common';
 
 export const ProtectedRoutes = () => {
