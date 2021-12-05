@@ -5,6 +5,8 @@ import Dashboard from './pages/Dashboard';
 import Erro from './pages/Erro';
 
 import Header from './components/Header';
+import { ProtectedRoutes } from './utils/ProtectedRoutes';
+import { PublicRoutes } from './utils/PublicRoutes';
 
 const RoutesAll = () => {
     return (
@@ -12,8 +14,12 @@ const RoutesAll = () => {
             <Header/>
             <Routes>
                 <Route exact path="/" element={<Home/>} />
-                <Route exact path="/login" element={<Login/>} />
-                <Route exact path="/dashboard" element={<Dashboard/>} />
+                <Route element={<PublicRoutes />}>
+                    <Route path="/login" element={<Login/>} />
+                </Route>
+                <Route element={<ProtectedRoutes />}>
+                    <Route path="/dashboard" element={<Dashboard/>} />
+                </Route>
                 <Route path="*" element={<Erro/>} />
             </Routes>
         </BrowserRouter>

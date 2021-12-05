@@ -1,11 +1,11 @@
 import './header.css';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 export default function Header (){
     return (
         <header>
-            <Link className="logo" to="/"> Home </Link>
-            <Link className="logo" to="/login"> Login </Link>
-            <Link className="logo" to="/dashboard"> Dashboard </Link>
+            <NavLink exact  className="logo" to="/"> Home </NavLink>
+            <NavLink className="logo" to="/login"> Login </NavLink>
+            <NavLink className="logo" to="/dashboard"> Dashboard </NavLink>
         </header>
     )
 }
